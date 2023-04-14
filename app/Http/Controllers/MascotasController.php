@@ -35,7 +35,7 @@ class MascotasController extends Controller
     public function store(Request $request, Mascotas $mascotas)
     {
         $mascotasDataValidated         = $request->validate($mascotas->validationRules());
-        $path                          = Storage::putFile('mascotas',$request->file('foto'));
+        $path                          = Storage::putFile($request->file('foto'));
         $mascotasDataValidated['foto'] = $path;
 
         $mascotas->create($mascotasDataValidated);
