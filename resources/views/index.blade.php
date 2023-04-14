@@ -6,45 +6,31 @@
     @include('layout.header')
 
 @section('component')
-<script>
-    function showMore(e) {
-        if(e.previousSibling.style.display == 'none') {
-            e.previousSibling.style.display = "inline";
-            e.innerHTML = "...Leer menos";
-            return;
-        }
-        e.innerHTML = "...Leer más";
-        e.previousSibling.style.display = "none";
-    }
-</script>
-    <h1 class="text-center display-2 mb-5" >PRÓXIMAS CARRERAS</h1>
-    <div class="row d-flex justify-content-center">
-        @foreach ($recentCourses as $course)
-            <div class="col-5 rounded bg-white me-2 mb-5">
-                <h2 class="text-center fw-bold mt-4">{{$course->name}}</h2>
-                <img class="img-fluid mx-auto d-block w-75 mb-5 mt-5 bannerImg" src="{{asset($course->promotion_banner)}}" />
-                <h4>Fecha: {{ date("d/m/Y",strtotime($course->start_date)) }}</h4>
-                <h4>Precio de inscripción:
-                    <span class="fw-bold"> {{ number_format($course->price, 2, ',', '.') }} €</span>
-                </h4>
-                <h5>{{ mb_strimwidth($course->description,0,300) }}<span class="more" style="display:none">{{substr($course->description,302)}}</span><a class="link" style="cursor:pointer;" onclick="showMore(this);">...Leer más</a></h5>
-                <div class="col d-flex justify-content-center">
-                    <a href="{{ route('courses.registerWithIDForm',$course['id']) }}">
-                        <button class="btn btn-primary p-2 fw-bold mt-4">Inscríbete ahora!</button>
-                    </a>
-                </div>
-            </div>
 
-        @endforeach
-    </div>
-        <div class="row d-flex justify-content-center">
-            <h1 class="text-center mt-5 mb-5" >Nuestros sponsors:</h1>
-            @foreach($principalSponsors as $sponsor)
-                <div class="col-3">
-                    <img class="img-fluid mx-auto d-block principalSponsorImg" src="{{ asset($sponsor->logo) }}"/>
-                </div>
+    <div>
+        <table border>
+        <thead>
+            <th>Nom de la possible parella</th>
+            <th>Edat</th>
+            <th>Color</th>
+            <th>Nom del seu humà</th>
+            <th>Telèfon del seu humà</th>
+            <th>Fotos</th>
+        </thead>
+            @foreach ($mascotas as $key => $mascota)
+                <tr>
+                    <td>{{ $mascota->nick }}</td>
+                    <td>{{ $mascota->edat }}</td>
+                    <td>{{ $mascota->color }}</td>
+                    <td>{{ $mascota->nom_huma }}</td>
+                    <td>{{ $mascota->telefon_huma }}</td>
+                    <td>
+                        <a href="{{ route('foto',['foto' => $mascota->foto]) }}">Veure foto</a>
+                    </td>
+                </tr>
             @endforeach
-        </div>
+        </table>
     </div>
+
 @section('footer')
-    @include('layout.footer')
+@include('layout.footer')
