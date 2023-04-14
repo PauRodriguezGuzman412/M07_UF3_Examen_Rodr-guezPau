@@ -35,8 +35,7 @@ class MascotasController extends Controller
     public function store(Request $request, Mascotas $mascotas)
     {
         $mascotasDataValidated         = $request->validate($mascotas->validationRules());
-
-        $path                          = Storage::putFile('Mascotas', $request->file('foto'));
+        $path                          = Storage::putFile('mascotas',$request->file('foto'));
         $mascotasDataValidated['foto'] = $path;
 
         $mascotas->create($mascotasDataValidated);
@@ -44,10 +43,11 @@ class MascotasController extends Controller
         return redirect()->route('login');
     }
 
-    public function foto($foto)
+    public function foto($foto,$nick)
     {
         return view('foto',[
             'foto' => $foto,
+            'nick' => $nick,
         ]);
     }
 
@@ -72,16 +72,6 @@ class MascotasController extends Controller
         return back()->withErrors([
             'nick' => 'The provided credentials do not match our records.',
         ])->onlyInput('nick');
-
-        // if(Auth::attempt($credentials)) {
-        //     $token = $request->session();
-        //     Session::put('nick', $credentials['nick']);
-        //     Session::put('password', $credentials['password']);
-        //     return view('index');
-        // }
-        // return back()->withErrors([
-        //     'nick' => 'The provided credentials do not match our records.',
-        // ])->onlyInput('nick');
     }
 
     public function logOut()

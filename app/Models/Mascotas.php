@@ -31,7 +31,7 @@ class Mascotas extends Model
             'raça'         => 'required',
             'sexe'         => 'required',
             'edat'         => 'required',
-            'color'     => 'required',
+            'color'        => 'required',
             'nom_huma'     => 'required',
             'telefon_huma' => 'required',
             'foto'         => 'required',

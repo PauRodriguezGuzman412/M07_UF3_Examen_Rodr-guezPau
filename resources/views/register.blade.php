@@ -54,6 +54,7 @@
             <button type="submit" class="submitLogAdminButton">Registrar</button>
         </div>
     </form>
+    <a href="{{ route('login') }}">Atrás</a>
 
     @foreach ($errors->all() as $error)
         <div class="container">

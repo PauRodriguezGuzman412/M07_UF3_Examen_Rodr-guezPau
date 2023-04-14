@@ -11,4 +11,4 @@ Route::get("/login/logout",[MascotasController::class,'logout'])->name("logOut")
 Route::get("/",[MascotasController::class,'index'])->name("index");
 Route::get("/register",[MascotasController::class,'register'])->name("register");
 Route::post("/register",[MascotasController::class,'store'])->name("store");
-Route::get("/foto/{foto}",[MascotasController::class,'foto'])->name("foto");
+Route::get("/foto/{foto}/{nick}",[MascotasController::class,'foto'])->name("foto");
